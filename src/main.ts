@@ -10,6 +10,7 @@ import {
   FileCoverageDiff
 } from './simplecov'
 
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const WORKSPACE: string = process.env.GITHUB_WORKSPACE!
 
 function doesPathExists(filepath: string): void {
@@ -97,15 +98,15 @@ async function run(): Promise<void> {
       base: parseResultset(paths.base),
       head: parseResultset(paths.head)
     }
-    // eslint-disable-next-line no-console
-    console.log(resultsets)
     const coverages = {
       base: new Coverage(resultsets.base),
       head: new Coverage(resultsets.head)
     }
-
+    // eslint-disable-next-line no-console
+    console.log('Coverages initialized')
     const diff = getCoverageDiff(coverages.base, coverages.head)
-
+    // eslint-disable-next-line no-console
+    console.log('diff', diff)
     let content: string
     if (diff.length === 0) {
       content = 'No differences'
@@ -115,7 +116,8 @@ async function run(): Promise<void> {
         ...diff.map(formatDiff)
       ])
     }
-
+    // eslint-disable-next-line no-console
+    console.log('content', content)
     const message = `## Coverage difference
 ${content}
 `

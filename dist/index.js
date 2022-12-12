@@ -603,6 +603,7 @@ const github = __importStar(__webpack_require__(469));
 const core = __importStar(__webpack_require__(470));
 const markdown_table_1 = __importDefault(__webpack_require__(366));
 const simplecov_1 = __webpack_require__(982);
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const WORKSPACE = process.env.GITHUB_WORKSPACE;
 function doesPathExists(filepath) {
     if (!fs.existsSync(filepath)) {
@@ -675,13 +676,15 @@ function run() {
                 base: parseResultset(paths.base),
                 head: parseResultset(paths.head)
             };
-            // eslint-disable-next-line no-console
-            console.log(resultsets);
             const coverages = {
                 base: new simplecov_1.Coverage(resultsets.base),
                 head: new simplecov_1.Coverage(resultsets.head)
             };
+            // eslint-disable-next-line no-console
+            console.log('Coverages initialized');
             const diff = simplecov_1.getCoverageDiff(coverages.base, coverages.head);
+            // eslint-disable-next-line no-console
+            console.log('diff', diff);
             let content;
             if (diff.length === 0) {
                 content = 'No differences';
@@ -692,6 +695,8 @@ function run() {
                     ...diff.map(formatDiff)
                 ]);
             }
+            // eslint-disable-next-line no-console
+            console.log('content', content);
             const message = `## Coverage difference
 ${content}
 `;
@@ -6514,10 +6519,10 @@ function isDifference(cov1, cov2) {
     if (!cov1 && cov2) {
         return true;
     }
-    if (cov1.lines !== cov2.lines) {
+    if ((cov1 === null || cov1 === void 0 ? void 0 : cov1.lines) !== (cov2 === null || cov2 === void 0 ? void 0 : cov2.lines)) {
         return true;
     }
-    if (cov1.branches !== cov2.branches) {
+    if ((cov1 === null || cov1 === void 0 ? void 0 : cov1.branches) !== (cov2 === null || cov2 === void 0 ? void 0 : cov2.branches)) {
         return true;
     }
     return false;

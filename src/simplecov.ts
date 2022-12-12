@@ -127,10 +127,10 @@ function isDifference(cov1?: FileCoverage, cov2?: FileCoverage): boolean {
   if (!cov1 && cov2) {
     return true
   }
-  if (cov1!.lines !== cov2!.lines) {
+  if (cov1?.lines !== cov2?.lines) {
     return true
   }
-  if (cov1!.branches !== cov2!.branches) {
+  if (cov1?.branches !== cov2?.branches) {
     return true
   }
   return false
