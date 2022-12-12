@@ -97,7 +97,8 @@ async function run(): Promise<void> {
       base: parseResultset(paths.base),
       head: parseResultset(paths.head)
     }
-
+    // eslint-disable-next-line no-console
+    console.log(resultsets)
     const coverages = {
       base: new Coverage(resultsets.base),
       head: new Coverage(resultsets.head)

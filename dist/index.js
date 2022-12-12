@@ -675,6 +675,8 @@ function run() {
                 base: parseResultset(paths.base),
                 head: parseResultset(paths.head)
             };
+            // eslint-disable-next-line no-console
+            console.log(resultsets);
             const coverages = {
                 base: new simplecov_1.Coverage(resultsets.base),
                 head: new simplecov_1.Coverage(resultsets.head)
@@ -6460,6 +6462,8 @@ function branchesCoverages(coverage) {
 class Coverage {
     constructor(resultset) {
         var _a, _b;
+        // eslint-disable-next-line no-console
+        console.log('Inside coverage class');
         this.files = [];
         for (const coverages of Object.values(resultset)) {
             for (const [filename, coverage] of Object.entries(coverages['coverage'])) {

@@ -67,8 +67,9 @@ function branchesCoverages(coverage: BranchCoverage): number {
 
 export class Coverage {
   files: FileCoverage[]
-
   constructor(resultset: ResultSet) {
+    // eslint-disable-next-line no-console
+    console.log('Inside coverage class')
     this.files = []
     for (const coverages of Object.values(resultset)) {
       for (const [filename, coverage] of Object.entries(
