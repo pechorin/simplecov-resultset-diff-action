@@ -74,8 +74,8 @@ export class Coverage {
       for (const [filename, coverage] of Object.entries(coverages['coverage'])) {        
         this.files.push({
           filename,
-          lines: linesCoverage(coverage.lines),
-          branches: branchesCoverages(coverage.branches)
+          lines: linesCoverage(coverage?.lines ?? []),
+          branches: branchesCoverages(coverage?.branches ?? {})
         })
       }
     }
