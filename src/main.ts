@@ -127,14 +127,21 @@ ${content}
      */
     const octokit = github.getOctokit(core.getInput('token'))
 
-    const pullRequestId = github.context.issue.number
+    const pullRequestId = (
+      await octokit.rest.repos.listPullRequestsAssociatedWithCommit({
+        commit_sha: github.context.sha,
+        owner: github.context.repo.owner,
+        repo: github.context.repo.repo
+      })
+    ).data[0].number
+
     if (!pullRequestId) {
       core.warning('Cannot find the PR id.')
       core.info(message)
       return
     }
 
-    await octokit.issues.createComment({
+    await octokit.rest.issues.createComment({
       owner: github.context.repo.owner,
       repo: github.context.repo.repo,
       issue_number: pullRequestId,
